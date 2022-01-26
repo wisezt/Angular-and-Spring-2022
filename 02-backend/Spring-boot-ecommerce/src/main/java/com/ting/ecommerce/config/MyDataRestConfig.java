@@ -1,7 +1,9 @@
 package com.ting.ecommerce.config;
 
+import com.ting.ecommerce.entity.Country;
 import com.ting.ecommerce.entity.Product;
 import com.ting.ecommerce.entity.ProductCategory;
+import com.ting.ecommerce.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +46,20 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         // disable HTTP methods for ProductCategory: PUT.POST and DELETE
         config.getExposureConfiguration()
                 .forDomainType(ProductCategory.class)
+                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+
+
+        // disable HTTP methods for State: PUT.POST and DELETE
+        config.getExposureConfiguration()
+                .forDomainType(State.class)
+                .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
+
+
+        // disable HTTP methods for Country: PUT.POST and DELETE
+        config.getExposureConfiguration()
+                .forDomainType(Country.class)
                 .withItemExposure(((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions)))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(theUnsupportedActions));
 
